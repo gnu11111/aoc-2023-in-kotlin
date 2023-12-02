@@ -5,37 +5,24 @@ class Day01(private val calibrationValues: List<String>) {
     companion object {
 
         const val RESOURCE = "/adventofcode/year2023/Day01.txt"
-        val numbers = listOf("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
+        val numbers = listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
     }
 
-    fun part1(): Long {
-        var total = 0L
-        calibrationValues.forEach { value ->
-            val firstDigit = value.first { it.isDigit() }
-            val lastDigit = value.last { it.isDigit() }
-            total += (firstDigit.digitToInt() * 10) + lastDigit.digitToInt()
+    fun part1(): Int =
+        calibrationValues.fold(0) { acc, value ->
+            val digits = value.filter { it.isDigit() }
+            acc + "${digits.first()}${digits.last()}".toInt()
         }
-        return total
-    }
 
-    fun part2(): Long {
-        var total = 0L
-        calibrationValues.forEach { value ->
-            val firstDigit = value.indexOfFirst { it.isDigit() }
-            val (firstIndex, firstNumber) = numbers.mapIndexed { i, s -> i to value.indexOf(s) }
-                .filter { it.second >= 0 }.minByOrNull { it.second } ?: Pair(Int.MAX_VALUE, Int.MAX_VALUE)
-            val lastDigit = value.indexOfLast { it.isDigit() }
-            val (lastIndex, lastNumber) = numbers.mapIndexed { i, s -> i to value.lastIndexOf(s) }
-                .filter { it.second >= 0 }.maxByOrNull { it.second } ?: Pair(-1, -1)
-            val first = if ((firstDigit >= 0) && (firstDigit < firstNumber))
-                value[firstDigit].digitToInt()
-            else
-                firstIndex
-            val last = if ((lastDigit >= 0) && (lastDigit > lastNumber)) value[lastDigit].digitToInt() else lastIndex
-            total += (first * 10L) + last
+    fun part2(): Int =
+        calibrationValues.fold(0) { acc, value ->
+            val firstDigit = numbers.mapIndexed { i, number -> i to value.indexOf(number) }
+                .filter { it.second >= 0 }.minByOrNull { it.second }?.first ?: 0
+            val lastDigit = numbers.mapIndexed { i, s -> i to value.lastIndexOf(s) }
+                .filter { it.second >= 0 }.maxByOrNull { it.second }?.first ?: 0
+            acc + ((firstDigit % 10) * 10) + (lastDigit % 10)
         }
-        return total
-    }
 }
 
 fun main() {
