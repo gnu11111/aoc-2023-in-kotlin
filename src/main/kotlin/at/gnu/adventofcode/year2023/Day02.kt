@@ -15,14 +15,14 @@ class Day02(input: List<String>) {
             null
         else {
             val parts = line.split(":")
-            val reveales = parts[1].split(";").map { reveal ->
+            val reveals = parts[1].split(";").map { reveal ->
                 reveal.split(",").map { cubes ->
                     val result = cubes.trim().split(" ")
                     result.first().toInt() to result.last().trim()
                 }
             }
             val gameNumber = parts[0].split(" ")[1].trim().toInt()
-            gameNumber to reveales
+            gameNumber to reveals
         }
     }
 
