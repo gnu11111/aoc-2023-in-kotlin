@@ -18,11 +18,11 @@ class Day02(input: List<String>) {
             val reveales = parts[1].split(";").map { reveal ->
                 reveal.split(",").map { cubes ->
                     val result = cubes.trim().split(" ")
-                    Pair(result.first().toInt(), result.last().trim())
+                    result.first().toInt() to result.last().trim()
                 }
             }
             val gameNumber = parts[0].split(" ")[1].trim().toInt()
-            Pair(gameNumber, reveales)
+            gameNumber to reveales
         }
     }
 
@@ -51,8 +51,7 @@ class Day02(input: List<String>) {
 }
 
 fun main() {
-    val input = Day02::class.java.getResource(Day02.RESOURCE)!!.readText().trim().split("\n", "\r\n")
-    val day02 = Day02(input)
+    val day02 = Day02(Day02::class.java.getResource(Day02.RESOURCE)!!.readText().trim().split("\n", "\r\n"))
     println("Day02::part1 -> ${day02.part1()}")
     println("Day02::part2 -> ${day02.part2()}")
 }
