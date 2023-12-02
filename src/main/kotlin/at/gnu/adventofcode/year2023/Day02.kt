@@ -7,6 +7,7 @@ class Day02(input: List<String>) {
         const val RED = "red"
         const val GREEN = "green"
         const val BLUE = "blue"
+        val MAX_AMOUNTS = mapOf(RED to 12, GREEN to 13, BLUE to 14)
     }
 
     private val games = input.mapNotNull { line ->
@@ -25,18 +26,16 @@ class Day02(input: List<String>) {
         }
     }
 
-    fun part1(): Int {
-        val max = mapOf(RED to 12, GREEN to 13, BLUE to 14)
-        return games.sumOf { game -> if (game.second.isValid(max)) game.first else 0 }
-    }
+    fun part1(): Int =
+        games.sumOf { game -> if (game.second.isValid()) game.first else 0 }
 
     fun part2(): Int =
         games.sumOf { game -> game.second.calculatePower() }
 
-    private fun List<List<Pair<Int, String>>>.isValid(max: Map<String, Int>): Boolean =
+    private fun List<List<Pair<Int, String>>>.isValid(): Boolean =
         all { reveal ->
             reveal.all { cubes ->
-                cubes.first <= max.getOrDefault(cubes.second, Int.MAX_VALUE)
+                cubes.first <= MAX_AMOUNTS.getOrDefault(cubes.second, 0)
             }
         }
 
@@ -44,8 +43,7 @@ class Day02(input: List<String>) {
         val amounts = mutableMapOf(RED to 0, GREEN to 0, BLUE to 0)
         forEach { reveal ->
             reveal.forEach { cubes ->
-                if (cubes.first > amounts.getOrDefault(cubes.second, 0))
-                    amounts[cubes.second] = cubes.first
+                amounts[cubes.second] = cubes.first.coerceAtLeast(amounts.getOrDefault(cubes.second, 0))
             }
         }
         return amounts.values.fold(1) { acc, amount -> acc * amount }
