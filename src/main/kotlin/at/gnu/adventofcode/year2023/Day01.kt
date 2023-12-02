@@ -16,8 +16,8 @@ class Day01(private val calibrationValues: List<String>) {
 
     fun part2(): Int =
         calibrationValues.fold(0) { acc, value ->
-            val (_, firstNumber) = value.findAnyOf(numbers) ?: (0 to "")
-            val (_, lastNumber) = value.findLastAnyOf(numbers) ?: (0 to "")
+            val (_, firstNumber) = value.findAnyOf(numbers) ?: (0 to "zero")
+            val (_, lastNumber) = value.findLastAnyOf(numbers) ?: (0 to "zero")
             acc + ((numbers.indexOf(firstNumber) % 10) * 10) + (numbers.indexOf(lastNumber) % 10)
         }
 }
