@@ -9,7 +9,7 @@ class Day02(input: List<String>) {
         const val BLUE = "blue"
     }
 
-    private val games = input.mapNotNull() { line ->
+    private val games = input.mapNotNull { line ->
         if (line.isBlank())
             null
         else {
