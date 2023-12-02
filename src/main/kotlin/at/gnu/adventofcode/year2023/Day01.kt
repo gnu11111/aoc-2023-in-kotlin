@@ -3,7 +3,6 @@ package at.gnu.adventofcode.year2023
 class Day01(private val calibrationValues: List<String>) {
 
     companion object {
-
         const val RESOURCE = "/adventofcode/year2023/Day01.txt"
         val numbers = listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
             "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
