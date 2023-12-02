@@ -16,11 +16,9 @@ class Day01(private val calibrationValues: List<String>) {
 
     fun part2(): Int =
         calibrationValues.fold(0) { acc, value ->
-            val firstDigit = numbers.mapIndexed { i, number -> i to value.indexOf(number) }
-                .filter { it.second >= 0 }.minByOrNull { it.second }?.first ?: 0
-            val lastDigit = numbers.mapIndexed { i, s -> i to value.lastIndexOf(s) }
-                .filter { it.second >= 0 }.maxByOrNull { it.second }?.first ?: 0
-            acc + ((firstDigit % 10) * 10) + (lastDigit % 10)
+            val (_, firstNumber) = value.findAnyOf(numbers) ?: (0 to "")
+            val (_, lastNumber) = value.findLastAnyOf(numbers) ?: (0 to "")
+            acc + ((numbers.indexOf(firstNumber) % 10) * 10) + (numbers.indexOf(lastNumber) % 10)
         }
 }
 
