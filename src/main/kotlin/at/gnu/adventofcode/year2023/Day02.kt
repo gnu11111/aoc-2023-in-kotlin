@@ -1,6 +1,5 @@
 package at.gnu.adventofcode.year2023
 
-
 class Day02(input: List<String>) {
 
     companion object {
