@@ -4,7 +4,7 @@ class Day01(private val calibrationValues: List<String>) {
 
     companion object {
         const val RESOURCE = "/adventofcode/year2023/Day01.txt"
-        val numbers = listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+        val NUMBERS = listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
             "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
     }
 
@@ -16,9 +16,9 @@ class Day01(private val calibrationValues: List<String>) {
 
     fun part2(): Int =
         calibrationValues.fold(0) { acc, value ->
-            val (_, firstNumber) = value.findAnyOf(numbers) ?: (0 to "zero")
-            val (_, lastNumber) = value.findLastAnyOf(numbers) ?: (0 to "zero")
-            acc + ((numbers.indexOf(firstNumber) % 10) * 10) + (numbers.indexOf(lastNumber) % 10)
+            val (_, firstNumber) = value.findAnyOf(NUMBERS) ?: (0 to "0")
+            val (_, lastNumber) = value.findLastAnyOf(NUMBERS) ?: (0 to "0")
+            acc + ((NUMBERS.indexOf(firstNumber) % 10) * 10) + (NUMBERS.indexOf(lastNumber) % 10)
         }
 }
 
