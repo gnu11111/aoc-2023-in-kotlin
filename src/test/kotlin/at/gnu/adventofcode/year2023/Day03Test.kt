@@ -7,8 +7,8 @@ import kotlin.time.measureTimedValue
 
 class Day03Test {
 
-    private val engineSchematic = listOf("467..114..", "...*......", "..35..633.", "......#...", "617*......", ".....+.58.",
-        "..592.....", "......755.", "...\$.*....", ".664.598..")
+    private val engineSchematic = listOf("467..114..", "...*......", "..35..633.", "......#...", "617*......",
+        ".....+.58.", "..592.....", "......755.", "...\$.*....", ".664.598..")
 
     private val test = mapOf(
         Day03::part1 to 4361,
