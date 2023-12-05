@@ -6,12 +6,14 @@ class Day05(input: List<List<String>>) {
         const val RESOURCE = "/adventofcode/year2023/Day05.txt"
     }
 
+    data class Mapping(val range: LongRange, val offset: Long)
+
     private val seeds = input.first().first().split(" ").drop(1).map(String::toLong)
 
     private val allMappings = input.drop(1).map {
         it.drop(1).map { mapping ->
             val (destination, source, size) = mapping.trim().split(" ").map(String::toLong)
-            Pair(source until (source + size), destination - source)
+            Mapping(source until (source + size), destination - source)
         }
     }
 
@@ -20,8 +22,8 @@ class Day05(input: List<List<String>>) {
             var location = seed
             for (mappings in allMappings) {
                 for (mapping in mappings) {
-                    if (location in mapping.first) {
-                        location += mapping.second
+                    if (location in mapping.range) {
+                        location += mapping.offset
                         break
                     }
                 }
@@ -35,9 +37,9 @@ class Day05(input: List<List<String>>) {
             var location = finalLocation
             for (mappings in allMappings.reversed())
                 for (mapping in mappings)
-                    if ((location - mapping.second) in mapping.first) {
-                        location -= mapping.second
-//                        println("$mapping: ${location + mapping.second} -> $location")
+                    if ((location - mapping.offset) in mapping.range) {
+                        location -= mapping.offset
+//                        println("$mapping: ${location + mapping.offset} -> $location")
                         break
                     }
             if (seedRanges.any { location in it })
