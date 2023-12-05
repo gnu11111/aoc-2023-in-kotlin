@@ -11,15 +11,11 @@ class Day04(input: List<String>) {
 
     data class Card(val winningNumbers: Set<Int>, val myNumbers: Set<Int>)
 
-    private val cards = input.mapNotNull { line ->
-        if (line.isBlank())
-            null
-        else {
-            val allNumbers = line.split(":")[1].split("|")
-            val winningNumbers = allNumbers[0].trim().split(WHITESPACES).map(String::toInt).toSet()
-            val myNumbers = allNumbers[1].trim().split(WHITESPACES).map(String::toInt).toSet()
-            Card(winningNumbers, myNumbers)
-        }
+    private val cards = input.map { line ->
+        val allNumbers = line.split(":")[1].split("|")
+        val winningNumbers = allNumbers[0].trim().split(WHITESPACES).map(String::toInt).toSet()
+        val myNumbers = allNumbers[1].trim().split(WHITESPACES).map(String::toInt).toSet()
+        Card(winningNumbers, myNumbers)
     }
 
     fun part1(): Int =

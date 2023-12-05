@@ -10,20 +10,16 @@ class Day02(input: List<String>) {
         val MAX_AMOUNTS = mapOf(RED to 12, GREEN to 13, BLUE to 14)
     }
 
-    private val games = input.mapNotNull { line ->
-        if (line.isBlank())
-            null
-        else {
-            val parts = line.split(":")
-            val reveals = parts[1].split(";").map { reveal ->
-                reveal.split(",").map { cubes ->
-                    val result = cubes.trim().split(" ")
-                    result.first().toInt() to result.last().trim()
-                }
+    private val games = input.map { line ->
+        val parts = line.split(":")
+        val reveals = parts[1].split(";").map { reveal ->
+            reveal.split(",").map { cubes ->
+                val result = cubes.trim().split(" ")
+                result.first().toInt() to result.last().trim()
             }
-            val gameNumber = parts[0].split(" ")[1].trim().toInt()
-            gameNumber to reveals
         }
+        val gameNumber = parts[0].split(" ")[1].trim().toInt()
+        gameNumber to reveals
     }
 
     fun part1(): Int =
