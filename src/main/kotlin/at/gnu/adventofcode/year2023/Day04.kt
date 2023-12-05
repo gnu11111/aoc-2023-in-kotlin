@@ -20,17 +20,17 @@ class Day04(input: List<String>) {
 
     fun part1(): Int =
         cards.fold(0) { acc, card ->
-            val winning = (card.winningNumbers intersect card.myNumbers).size
-            if (winning > 0) acc + 2.0.pow(winning - 1.0).toInt() else acc
+            val winningAmount = (card.winningNumbers intersect card.myNumbers).size
+            if (winningAmount > 0) acc + 2.0.pow(winningAmount - 1.0).toInt() else acc
         }
 
     fun part2(): Int {
-        val winningCards = Array(cards.size) { 1 }
-        for ((cardNumber, numbers) in cards.withIndex()) {
-            val winning = (numbers.winningNumbers intersect numbers.myNumbers).size
-            (1..winning).forEach { winningCards[cardNumber + it] += winningCards[cardNumber] }
+        val totalCards = Array(cards.size) { 1 }
+        for ((cardNumber, card) in cards.withIndex()) {
+            val winningAmount = (card.winningNumbers intersect card.myNumbers).size
+            (1..winningAmount).forEach { totalCards[cardNumber + it] += totalCards[cardNumber] }
         }
-        return winningCards.sum()
+        return totalCards.sum()
     }
 }
 
