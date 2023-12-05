@@ -29,9 +29,8 @@ class Day04(input: List<String>) {
         }
 
     fun part2(): Int {
-        val winningCards = Array(cards.size) { 0 }
+        val winningCards = Array(cards.size) { 1 }
         for ((cardNumber, numbers) in cards.withIndex()) {
-            winningCards[cardNumber]++
             val winning = (numbers.winningNumbers intersect numbers.myNumbers).size
             (1..winning).forEach { winningCards[cardNumber + it] += winningCards[cardNumber] }
         }
