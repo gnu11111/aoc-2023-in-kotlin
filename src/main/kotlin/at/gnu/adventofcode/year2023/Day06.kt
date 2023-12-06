@@ -7,34 +7,25 @@ class Day06(input: List<String>) {
         val WHITESPACES = """\s+""".toRegex()
     }
 
-    private val durations = input.first().split(WHITESPACES).drop(1).map(String::toInt)
-    private val distances = input.drop(1).first().split(WHITESPACES).drop(1).map(String::toInt)
+    private val durations = input.first().split(WHITESPACES).drop(1).map(String::toLong)
+    private val distances = input.drop(1).first().split(WHITESPACES).drop(1).map(String::toLong)
 
-    fun part1(): Long {
-        var result = 1L
-        for ((duration, winningDistance) in durations zip distances) {
-            var count = 0L
-            for (time in 1..duration) {
-                val distance = time * (duration - time)
-                if (distance > winningDistance)
-                    count++
-            }
-            result *= count
+    fun part1() =
+        (durations zip distances).fold(1) { acc, (duration, winningDistance) ->
+            acc * countWinningRaces(duration, winningDistance)
         }
-        return result
+
+    fun part2(): Int {
+        val duration = durations.joinToString("", transform = Long::toString).toLong()
+        val winningDistance = distances.joinToString("", transform = Long::toString).toLong()
+        return countWinningRaces(duration, winningDistance)
     }
 
-    fun part2(): Long {
-        val duration = durations.joinToString("", transform = Int::toString).toLong()
-        val winningDistance = distances.joinToString("", transform = Int::toString).toLong()
-        var count = 0L
-        for (time in 1..duration) {
+    private fun countWinningRaces(duration: Long, winningDistance: Long) =
+        (1..duration).fold(0) { acc, time ->
             val distance = time * (duration - time)
-            if (distance > winningDistance)
-                count++
+            acc + if (distance > winningDistance) 1 else 0
         }
-        return count
-    }
 }
 
 fun main() {

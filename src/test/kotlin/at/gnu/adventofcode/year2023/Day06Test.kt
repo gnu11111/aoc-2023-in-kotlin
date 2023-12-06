@@ -7,11 +7,13 @@ import kotlin.time.measureTimedValue
 
 class Day06Test {
 
-    private val input = listOf("Time:      7  15   30", "Distance:  9  40  200")
+    private val input = listOf(
+        "Time:      7  15   30",
+        "Distance:  9  40  200")
 
     private val test = mapOf(
-        Day06::part1 to 288L,
-        Day06::part2 to 71503L
+        Day06::part1 to 288,
+        Day06::part2 to 71503
     )
 
     @Test @ExperimentalTime
