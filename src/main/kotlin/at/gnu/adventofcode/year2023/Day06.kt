@@ -22,9 +22,9 @@ class Day06(input: List<String>) {
     }
 
     private fun countWinningRaces(duration: Long, winningDistance: Long) =
-        (1..duration).fold(0) { acc, time ->
+        (1..duration).count { time ->
             val distance = time * (duration - time)
-            acc + if (distance > winningDistance) 1 else 0
+            distance > winningDistance
         }
 }
 
