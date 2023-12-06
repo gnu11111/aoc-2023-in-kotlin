@@ -10,7 +10,7 @@ class Day06(input: List<String>) {
     private val durations = input.first().split(WHITESPACES).drop(1).map(String::toLong)
     private val distances = input.drop(1).first().split(WHITESPACES).drop(1).map(String::toLong)
 
-    fun part1() =
+    fun part1(): Int =
         (durations zip distances).fold(1) { acc, (duration, winningDistance) ->
             acc * countWinningRaces(duration, winningDistance)
         }
