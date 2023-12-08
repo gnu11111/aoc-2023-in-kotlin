@@ -21,11 +21,11 @@ class Day08Test {
 
     @Test @ExperimentalTime
     fun testMySolution() {
-        for (function in test.keys) {
-            val day08 = Day08(function.second.first, function.second.second)
-            val (result, time) = measureTimedValue { function.first.invoke(day08) }
-            println("Day08::${function.first.name}: ${function.second.second.size} nodes -> $result [${time}]")
-            assertEquals(test[function], result)
+        for (key in test.keys) {
+            val day08 = Day08(key.second.first, key.second.second)
+            val (result, time) = measureTimedValue { key.first.invoke(day08) }
+            println("Day08::${key.first.name}: ${key.second.second.size} nodes -> $result [${time}]")
+            assertEquals(test[key], result)
         }
     }
 }

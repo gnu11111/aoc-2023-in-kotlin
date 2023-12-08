@@ -9,31 +9,30 @@ class Day08(private val instructions: String, network: List<String>) {
 
     data class Node(val name: String, val left: String, val right: String)
 
-    private val nodes = network.map {
-        val (_, name, left, right) = NODE.matchEntire(it)!!.groupValues
-        Node(name, left, right)
+    private val nodes = network.associate {
+        val (name, left, right) = NODE.matchEntire(it)!!.destructured
+        name to Node(name, left, right)
     }
 
     fun part1(): Long =
-        calculateStepsFrom(nodes.first { it.name == "AAA" })
+        calculateStepsFrom(nodes["AAA"]!!)
 
     fun part2(): Long {
-        val startNodes = nodes.filter { it.name.last() == 'A' }
-        val results = startNodes.map { calculateStepsFrom(it, "Z") }
-//        println(results)
-        return results.fold(1L) { acc, it -> lcm(acc, it) }
+        val startNodes = nodes.filter { it.key.last() == 'A' }.values
+        val distances = startNodes.map { calculateStepsFrom(it, "Z") }
+        return distances.fold(1L) { acc, it -> lcm(acc, it) }
     }
 
     private fun calculateStepsFrom(startNode: Node, endNode: String = "ZZZ"): Long {
         var currentNode = startNode
-        var currentInstruction = 0
+        var instruction = 0
         while (!currentNode.name.endsWith(endNode)) {
-            currentNode = if (instructions[currentInstruction++ % instructions.length] == 'L')
-                nodes.first { it.name == currentNode.left }
+            currentNode = if (instructions[instruction++ % instructions.length] == 'L')
+                nodes[currentNode.left]!!
             else
-                nodes.first { it.name == currentNode.right }
+                nodes[currentNode.right]!!
         }
-        return currentInstruction.toLong()
+        return instruction.toLong()
     }
 
     private tailrec fun gcd(x: Long, y: Long): Long =
