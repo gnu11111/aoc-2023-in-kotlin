@@ -17,22 +17,8 @@ class Day11(image: List<String>) {
     }.flatten()
 
     private val emptyRows = image.mapIndexedNotNull { y, row -> if (row == ".".repeat(row.length)) y else null }.toSet()
-    private val emptyCols: Set<Int>
 
-    init {
-        val temp = mutableSetOf<Int>()
-        for (x in image.first().indices) {
-            var empty = true
-            for (row in image) {
-                if (row[x] == '#') {
-                    empty = false
-                    break
-                }
-            }
-            if (empty) temp += x
-        }
-        emptyCols = temp.toSet()
-    }
+    private val emptyCols = buildSet { image.first().indices.forEach { x -> if (image.all { it[x] == '.' }) add(x) } }
 
 
     fun part1(size: Int): Long =
