@@ -10,13 +10,13 @@ class Day11(image: List<String>) {
 
     data class Galaxy(val x: Int, val y: Int)
 
-    private val universe = image.mapIndexed { y, row ->
+    private val universe = image.flatMapIndexed { y, row ->
         row.mapIndexedNotNull { x, c ->
             if (c == '#') Galaxy(x, y) else null
         }
-    }.flatten()
+    }
 
-    private val emptyRows = image.mapIndexedNotNull { y, row -> if (row == ".".repeat(row.length)) y else null }.toSet()
+    private val emptyRows = image.mapIndexedNotNull { y, row -> if (row.all { it == '.' }) y else null }.toSet()
 
     private val emptyCols = buildSet { image.first().indices.forEach { x -> if (image.all { it[x] == '.' }) add(x) } }
 
