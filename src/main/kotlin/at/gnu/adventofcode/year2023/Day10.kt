@@ -13,7 +13,7 @@ class Day10(input: List<String>) {
     private val pipes = input.mapIndexedNotNull { y: Int, line: String ->
         line.mapIndexedNotNull { x, c ->
             when (c) {
-                'S' -> Pipe('L', Position(x, y), OUT_OF_BOUNDS, OUT_OF_BOUNDS)
+                'S' -> Pipe('S', Position(x, y), OUT_OF_BOUNDS, OUT_OF_BOUNDS)
                 '-' -> Pipe('-', Position(x, y), Position(x - 1, y), Position(x + 1, y))
                 '|' -> Pipe('|', Position(x, y), Position(x, y - 1), Position(x, y + 1))
                 'J' -> Pipe('J', Position(x, y), Position(x - 1, y), Position(x, y - 1))
