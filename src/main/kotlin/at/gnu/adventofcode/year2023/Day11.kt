@@ -4,10 +4,6 @@ import kotlin.math.abs
 
 class Day11(image: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day11.txt"
-    }
-
     data class Galaxy(val x: Int, val y: Int)
 
     private val universe = image.flatMapIndexed { y, row ->
@@ -39,6 +35,10 @@ class Day11(image: List<String>) {
 
     private fun calculateDistance(galaxy1: Galaxy, galaxy2: Galaxy): Int =
         abs(galaxy1.x - galaxy2.x) + abs(galaxy1.y - galaxy2.y)
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day11.txt"
+    }
 }
 
 fun main() {
