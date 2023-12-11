@@ -21,7 +21,7 @@ class Day11Test {
         val day11 = Day11(image)
         for ((function, size) in test.keys) {
             val (result, time) = measureTimedValue { function.invoke(day11, size) }
-            println("Day11::${function.name}: ${image.size} rows -> $result [${time}]")
+            println("Day11::${function.name}: ${image.size} rows, expansion-size: $size -> $result [${time}]")
             assertEquals(test[function to size], result)
         }
     }
