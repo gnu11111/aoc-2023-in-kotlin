@@ -12,7 +12,7 @@ class Day12Test {
 
     private val test = mapOf(
         Day12::part1 to 21L,
-        Day12::part2 to 0L
+        Day12::part2 to 525152L
     )
 
     @Test @ExperimentalTime
