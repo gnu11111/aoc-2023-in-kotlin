@@ -25,14 +25,15 @@ class Day12(input: List<String>) {
                                   cache: MutableMap<Pair<String, List<Int>>, Long> = mutableMapOf()): Long {
         val key = positions to groups
         cache[key]?.let { return it }
-        if (positions.isEmpty())
-            return if (groups.isEmpty()) 1 else 0
 
-        val position = positions.first()
+        val position = positions.firstOrNull()
         val group = groups.firstOrNull() ?: 0
         val remainingGroups = groups.drop(1)
 
         return when {
+            positions.isEmpty() && groups.isEmpty() -> 1
+            positions.isEmpty() -> 0
+
             (position == '.') -> countArrangements(positions.dropWhile { it == '.' }, groups, cache)
 
             (position == '?') -> countArrangements(positions.drop(1), groups, cache) +
