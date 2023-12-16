@@ -2,10 +2,6 @@ package at.gnu.adventofcode.year2023
 
 class Day15(private val initializationSequence: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day15.txt"
-    }
-
     fun part1(): Int =
         initializationSequence.sumOf(::calculateHashcode)
 
@@ -41,6 +37,10 @@ class Day15(private val initializationSequence: List<String>) {
 
     private fun calculateHashcode(step: String): Int =
         step.fold(0) { acc, c -> ((acc + c.code) * 17) % 256 }
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day15.txt"
+    }
 }
 
 fun main() {

@@ -19,7 +19,7 @@ class Day15Test {
         val day15 = Day15(initializationSequence)
         for (function in test.keys) {
             val (result, time) = measureTimedValue { function(day15) }
-            println("Day15::${function.name}: ${initializationSequence.size} entries -> $result [$time]")
+            println("Day15::${function.name}: ${initializationSequence.size} steps -> $result [$time]")
             assertEquals(test[function], result)
         }
     }
