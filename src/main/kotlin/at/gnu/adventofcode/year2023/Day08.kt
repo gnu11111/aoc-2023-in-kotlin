@@ -2,17 +2,13 @@ package at.gnu.adventofcode.year2023
 
 class Day08(private val instructions: String, network: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day08.txt"
-        val NODE = """(\w+) = \((\w+), (\w+)\)""".toRegex()
-    }
-
     data class Node(val name: String, val left: String, val right: String)
 
     private val nodes = network.associate {
         val (name, left, right) = NODE.matchEntire(it)!!.destructured
         name to Node(name, left, right)
     }
+
 
     fun part1(): Long =
         calculateStepsFrom(nodes["AAA"]!!)
@@ -40,6 +36,11 @@ class Day08(private val instructions: String, network: List<String>) {
 
     private fun lcm(x: Long, y: Long): Long =
         x * (y / gcd(x, y))
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day08.txt"
+        val NODE = """(\w+) = \((\w+), (\w+)\)""".toRegex()
+    }
 }
 
 fun main() {

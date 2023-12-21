@@ -2,10 +2,6 @@ package at.gnu.adventofcode.year2023
 
 class Day05(input: List<List<String>>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day05.txt"
-    }
-
     data class Mapping(val range: LongRange, val offset: Long)
 
     private val seeds = input.first().first().split(" ").drop(1).map(String::toLong)
@@ -16,6 +12,7 @@ class Day05(input: List<List<String>>) {
             Mapping(source until (source + size), destination - source)
         }
     }
+
 
     fun part1(): Long =
         seeds.map { seed ->
@@ -46,6 +43,10 @@ class Day05(input: List<List<String>>) {
                 return finalLocation
         }
         return -1L
+    }
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day05.txt"
     }
 }
 

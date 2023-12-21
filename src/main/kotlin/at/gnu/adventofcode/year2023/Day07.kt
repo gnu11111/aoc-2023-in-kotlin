@@ -2,10 +2,6 @@ package at.gnu.adventofcode.year2023
 
 class Day07(input: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day07.txt"
-    }
-
     class Round(val cards: String, val bid: Int, private var gameType: Int = 0) : Comparable<Round> {
 
         private val cardStrengths = listOf(
@@ -77,6 +73,7 @@ class Day07(input: List<String>) {
         Round(parts[0].trim().uppercase(), parts[1].toInt())
     }
 
+
     fun part1(): Long =
         rounds.sorted().mapIndexed { i, round -> (i + 1L) * round.bid }.sum()
 
@@ -84,6 +81,10 @@ class Day07(input: List<String>) {
 //        rounds.forEach { println("${it.cards.split("").sorted().joinToString("")}: " +
 //                    "${Round(it.cards, it.bid, 1).calculateTypeWithJokers(it.cards)}") }
         return rounds.map { Round(it.cards, it.bid, 1) }.sorted().mapIndexed { i, round -> (i + 1L) * round.bid }.sum()
+    }
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day07.txt"
     }
 }
 

@@ -2,13 +2,9 @@ package at.gnu.adventofcode.year2023
 
 class Day06(input: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day06.txt"
-        val WHITESPACES = """\s+""".toRegex()
-    }
-
     private val durations = input.first().split(WHITESPACES).drop(1).map(String::toLong)
     private val distances = input.drop(1).first().split(WHITESPACES).drop(1).map(String::toLong)
+
 
     fun part1(): Int =
         (durations zip distances).fold(1) { acc, (duration, winningDistance) ->
@@ -26,6 +22,11 @@ class Day06(input: List<String>) {
             val distance = time * (duration - time)
             distance > winningDistance
         }
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day06.txt"
+        val WHITESPACES = """\s+""".toRegex()
+    }
 }
 
 fun main() {

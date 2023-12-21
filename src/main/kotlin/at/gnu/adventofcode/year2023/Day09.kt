@@ -2,11 +2,8 @@ package at.gnu.adventofcode.year2023
 
 class Day09(input: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day09.txt"
-    }
-
     private val report = input.map { it.split(" ").map(String::toLong) }
+
 
     fun part1(): Long {
         val predictions = mutableListOf<Long>()
@@ -37,6 +34,10 @@ class Day09(input: List<String>) {
             predictions += extrapolation
         }
         return predictions.sum()
+    }
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day09.txt"
     }
 }
 

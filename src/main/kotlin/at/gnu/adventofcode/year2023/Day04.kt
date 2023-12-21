@@ -4,11 +4,6 @@ import kotlin.math.pow
 
 class Day04(input: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day04.txt"
-        val WHITESPACES = """\s+""".toRegex()
-    }
-
     data class Card(val winningNumbers: Set<Int>, val myNumbers: Set<Int>)
 
     private val cards = input.map { line ->
@@ -17,6 +12,7 @@ class Day04(input: List<String>) {
         val myNumbers = allNumbers[1].trim().split(WHITESPACES).map(String::toInt).toSet()
         Card(winningNumbers, myNumbers)
     }
+
 
     fun part1(): Int =
         cards.fold(0) { acc, card ->
@@ -31,6 +27,11 @@ class Day04(input: List<String>) {
             (1..winningAmount).forEach { totalCards[cardNumber + it] += totalCards[cardNumber] }
         }
         return totalCards.sum()
+    }
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day04.txt"
+        val WHITESPACES = """\s+""".toRegex()
     }
 }
 

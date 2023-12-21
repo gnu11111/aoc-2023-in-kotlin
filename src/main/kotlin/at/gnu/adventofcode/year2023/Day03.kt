@@ -2,10 +2,6 @@ package at.gnu.adventofcode.year2023
 
 class Day03(private val engineSchematic: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day03.txt"
-    }
-
     fun part1(): Int =
         findPartNumbers().sumOf { it.first }
 
@@ -84,6 +80,10 @@ class Day03(private val engineSchematic: List<String>) {
     private fun isSymbol(x: Int, y: Int): Boolean {
         val c = engineSchematic.getOrNull(y)?.getOrNull(x) ?: return false
         return !c.isDigit() && (c != '.')
+    }
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day03.txt"
     }
 }
 

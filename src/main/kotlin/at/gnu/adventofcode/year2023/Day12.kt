@@ -11,6 +11,7 @@ class Day12(input: List<String>) {
         Record(positions, amounts)
     }
 
+
     fun part1(): Long =
         records.sumOf { countArrangements(it.positions, it.groups) }
 

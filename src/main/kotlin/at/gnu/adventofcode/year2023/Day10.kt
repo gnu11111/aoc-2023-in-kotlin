@@ -2,11 +2,6 @@ package at.gnu.adventofcode.year2023
 
 class Day10(input: List<String>) {
 
-    companion object {
-        const val RESOURCE = "/adventofcode/year2023/Day10.txt"
-        val OUT_OF_BOUNDS = Position(-1, -1)
-    }
-
     data class Position(val x: Int, val y: Int)
     data class Pipe(val symbol: Char, val position: Position, val conn1: Position, val conn2: Position)
 
@@ -113,6 +108,11 @@ class Day10(input: List<String>) {
 //        println("$firstX/$firstY, $lastX/$lastY -> $newStart")
         visited[0] = Pipe(newStart, start.position, start.conn1, start.conn2)
         return visited to (turnsRight > turnsLeft)
+    }
+
+    companion object {
+        const val RESOURCE = "/adventofcode/year2023/Day10.txt"
+        val OUT_OF_BOUNDS = Position(-1, -1)
     }
 }
 
