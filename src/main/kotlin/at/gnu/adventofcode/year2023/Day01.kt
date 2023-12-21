@@ -9,16 +9,16 @@ class Day01(private val calibrationValues: List<String>) {
     }
 
     fun part1(): Int =
-        calibrationValues.fold(0) { acc, value ->
+        calibrationValues.sumOf { value ->
             val digits = value.filter { it.isDigit() }
-            acc + "${digits.first()}${digits.last()}".toInt()
+            "${digits.first()}${digits.last()}".toInt()
         }
 
     fun part2(): Int =
-        calibrationValues.fold(0) { acc, value ->
+        calibrationValues.sumOf { value ->
             val (_, firstNumber) = value.findAnyOf(NUMBERS) ?: (0 to "0")
             val (_, lastNumber) = value.findLastAnyOf(NUMBERS) ?: (0 to "0")
-            acc + ((NUMBERS.indexOf(firstNumber) % 10) * 10) + (NUMBERS.indexOf(lastNumber) % 10)
+            ((NUMBERS.indexOf(firstNumber) % 10) * 10) + (NUMBERS.indexOf(lastNumber) % 10)
         }
 }
 
